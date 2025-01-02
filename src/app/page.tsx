@@ -4,6 +4,10 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+
+
+
+
 interface FoodItem {
   _id: string;
   name: string;
@@ -86,14 +90,14 @@ export default function RecipeList() {
                 {groupedRecipes[category]?.map(recipe => (
                   <Card key={recipe._id} className="bg-card">
                     <CardContent className="p-3">
-                        <h3 className="text-base font-medium mb-2">{recipe.name}</h3>  {/* Added text-green-600 */}
-                        <div className="flex flex-wrap gap-1.5">
+                      <h3 className="text-base font-medium mb-2 twin-peaks-title">{recipe.name}</h3>
+                      <div className="flex flex-wrap gap-1.5">
                         {recipe.ingredients.map(ingredient => (
-                          <Badge 
+                          <Badge
                             key={ingredient._id}
                             variant="outline"
                             className={`text-xs ${!ingredient.instock ? 'text-gray-300' : ''}`}
-                            >
+                          >
                             {ingredient.name}
                           </Badge>
                         ))}

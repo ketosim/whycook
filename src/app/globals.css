@@ -54,6 +54,18 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%}
+    .twin-peaks-title {
+      /* No need to specify font-family as it's handled by Next.js */
+      color: #ff0000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      -webkit-text-stroke: 2px #00ff00;
+      text-shadow: 
+        -1px -1px 0 #00ff00,
+        1px -1px 0 #00ff00,
+        -1px 1px 0 #00ff00,
+        1px 1px 0 #00ff00;
+    }
 }
 @layer base {
   * {

@@ -60,7 +60,7 @@
       color: #ff0000;
       text-transform: uppercase;
       letter-spacing: 1px;
-      -webkit-text-stroke: 2px #00ff00;
+      -webkit-text-stroke: 0.5px #00ff00;
       text-shadow: 
         -1px -1px 0 #00ff00,
         1px -1px 0 #00ff00,

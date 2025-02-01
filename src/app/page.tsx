@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Heart } from "lucide-react";
+// import { Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -132,10 +132,11 @@ export default function RecipeList() {
                     <CardContent className="p-3">
                       <div className="flex justify-between items-center">
                         <h3 className="text-base font-medium mb-2 twin-peaks-title">{recipe.name}</h3>
-                        <div onClick={() => toggleWishlist(recipe._id,recipe.wishlist)} className="cursor-pointer">
-                          <span className={recipe.wishlist ? 'text-red-500' : 'text-gray-500'} style={{ fontSize: '24px' }}>
+                        <div onClick={() => toggleWishlist(recipe._id, recipe.wishlist)} className="cursor-pointer relative">
+                          <span className={recipe.wishlist ? 'text-pink-500' : 'text-gray-500'} style={{ fontSize: '24px' }}>
                             {recipe.wishlist ? '💗' : '🤍'}
                           </span>
+      
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-1.5">

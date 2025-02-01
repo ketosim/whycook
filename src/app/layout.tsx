@@ -18,7 +18,7 @@ const antonio = Antonio({
 
 const gothic_A1 = Gothic_A1({
   subsets: ['latin'],
-  weight: ['500', '600'],  // Specify the weights you want to use
+  weight: [ '900'],  // Specify the weights you want to use
   display: 'swap',
 })
 

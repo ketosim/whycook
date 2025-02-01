@@ -56,19 +56,19 @@
     --chart-5: 340 75% 55%}
     .twin-peaks-title {
       font-family: 'Gothic_A1', sans-serif;
-      font-weight: 1000;
-      color: #ff4500;
+      font-weight: 900;
+      color: #c41616;
       text-transform: uppercase;
       letter-spacing: 1.9px;  /* Reduced letter spacing since font is already condensed */
-      -webkit-text-stroke: 0.15px #00ff7f;
+      /* -webkit-text-stroke: 0.01px #39ff14; */
       text-shadow: 
-        -.7px -.7px 0 #00ff7f,
-        .7px -.7px 0 #00ff7f,
-        -.7px .7px 0 #00ff7f,
-        .7px .7px 0 #00ff7f,
-        1.6px 1.6px #000000;   /* Black shadow to bottom-right */
+        -.5px -.5px 0 #39ff14,
+        .5px -.5px 0 #39ff14,
+        -.5px .5px 0 #39ff14,
+        .5px .5px 0 #39ff14,
+        1px 1px #000000;   /* Black shadow to bottom-right */
 
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
 }
 @layer base {

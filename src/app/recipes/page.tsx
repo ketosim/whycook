@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Heart } from "lucide-react";
 
 interface FoodItem {
   _id: string;
@@ -26,6 +27,7 @@ interface Recipe {
   name: string;
   category: string;
   ingredients: FoodItem[];
+  wishlist: boolean;
 }
 
 const RECIPE_CATEGORIES = [
@@ -165,6 +167,27 @@ export default function RecipePage() {
     );
   };
   
+  async function toggleWishlist(recipeId: string, currentValue: boolean) {
+    try {
+      const response = await fetch('/api/recipes', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          id: recipeId,
+          wishlist: !currentValue 
+        }),
+      });
+      
+      if (!response.ok) throw new Error('Failed to update wishlist');
+      
+      // Refresh the page or update the UI
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
+    }
+  }
 
   return (
     <div className="max-w-[1200px] mx-auto p-6">
@@ -291,15 +314,28 @@ export default function RecipePage() {
                   {groupedRecipes[category]?.map(recipe => (
                     <Card key={recipe._id}>
                       <CardContent className="pt-6">
-                        <div className="flex justify-between items-start mb-2">
-                          <h3 className="text-lg font-semibold">{recipe.name}</h3>
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => deleteRecipe(recipe._id)}
-                          >
-                            Delete
-                          </Button>
+                        <div className="flex justify-between items-center mb-2">
+                          <h3 className="text-lg font-semibold flex-grow">{recipe.name}</h3>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => toggleWishlist(recipe._id, recipe.wishlist)}
+                              className="flex items-center justify-center w-10 h-10"
+                            >
+                              <Heart 
+                                size={20}
+                                className={recipe.wishlist ? 'fill-red-500 text-red-500' : 'text-gray-500'} 
+                              />
+                            </Button>
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => deleteRecipe(recipe._id)}
+                            >
+                              Delete
+                            </Button>
+                          </div>
                         </div>
                         <div className="flex flex-wrap gap-1">
                           {recipe.ingredients.map(ingredient => (

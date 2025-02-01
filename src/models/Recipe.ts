@@ -1,7 +1,17 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Document } from 'mongoose'
 
-const recipeSchema = new mongoose.Schema({
-  name: {
+// Interface to define the Recipe document structure
+export interface IRecipe extends Document {
+  title: string;
+  ingredients: string[];
+  instructions: string[];
+  wishlist: boolean;
+  // ... any other fields your recipe has
+}
+
+// Create the schema
+const recipeSchema = new Schema({
+  title: {
     type: String,
     required: true,
     unique: true
@@ -15,7 +25,13 @@ const recipeSchema = new mongoose.Schema({
   ingredients: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Food'
-  }]
+  }],
+  instructions: [{ type: String }],
+  wishlist: {
+    type: Boolean,
+    default: false
+  }
 })
 
-export default mongoose.models.Recipe || mongoose.model('Recipe', recipeSchema)
+// Export the model
+export default mongoose.models.Recipe || mongoose.model<IRecipe>('Recipe', recipeSchema)

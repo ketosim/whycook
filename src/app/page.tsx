@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -21,6 +22,7 @@ interface Recipe {
   name: string;
   category: string;
   ingredients: FoodItem[];
+  wishlist: boolean;
 }
 
 const RECIPE_CATEGORIES = [
@@ -58,6 +60,29 @@ export default function RecipeList() {
     fetchRecipes();
   }, []);
 
+  async function toggleWishlist(recipeId: string, currentValue: boolean) {
+    try {
+      const response = await fetch('/api/recipes', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          id: recipeId,
+          wishlist: !currentValue 
+        }),
+      });
+      
+      if (!response.ok) throw new Error('Failed to update wishlist');
+      
+      // Refresh the page or update the UI
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
+    }
+  };
+
+
   const groupedRecipes = React.useMemo(() => {
     return recipes.reduce((acc: Record<string, Recipe[]>, recipe) => {
       if (!acc[recipe.category]) {
@@ -90,13 +115,21 @@ export default function RecipeList() {
                 {groupedRecipes[category]?.map(recipe => (
                   <Card key={recipe._id} className="bg-card">
                     <CardContent className="p-3">
-                      <h3 className="text-base font-medium mb-2 twin-peaks-title">{recipe.name}</h3>
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-base font-medium mb-2 twin-peaks-title">{recipe.name}</h3>
+                        <div onClick={() => toggleWishlist(recipe._id,recipe.wishlist)} className="cursor-pointer">
+                          <Heart 
+                            size={24} //                            
+
+                            className={recipe.wishlist ? 'text-red-500' : 'text-gray-500'} 
+                          />
+                        </div>
+                      </div>
                       <div className="flex flex-wrap gap-1.5">
                         {recipe.ingredients.map(ingredient => (
                           <Badge
                             key={ingredient._id}
-                            variant="outline"
-                            className={`text-xs ${!ingredient.instock ? 'text-gray-300' : ''}`}
+                            variant={ingredient.instock ? "default" : "secondary"}
                           >
                             {ingredient.name}
                           </Badge>

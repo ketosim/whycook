@@ -76,3 +76,30 @@ export async function DELETE(request: Request) {
     );
   }
 }
+
+export async function PATCH(request: Request) {
+  try {
+    const { id, wishlist } = await request.json();
+
+    const recipe = await Recipe.findByIdAndUpdate(
+      id,
+      { wishlist },
+      { new: true }
+    );
+
+    if (!recipe) {
+      return NextResponse.json(
+        { error: 'Recipe not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(recipe);
+  } catch (error) {
+    console.error('Error updating recipe wishlist:', error);
+    return NextResponse.json(
+      { error: 'Error updating recipe' },
+      { status: 500 }
+    );
+  }
+}

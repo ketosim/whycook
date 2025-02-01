@@ -76,7 +76,7 @@ export default function RecipeList() {
       if (!response.ok) throw new Error('Failed to update wishlist');
       
       // Refresh the page or update the UI
-      window.location.reload();
+      
     } catch (error) {
       console.error('Error updating wishlist:', error);
     }

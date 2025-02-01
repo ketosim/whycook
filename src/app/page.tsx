@@ -76,6 +76,11 @@ export default function RecipeList() {
       if (!response.ok) throw new Error('Failed to update wishlist');
       
       // Refresh the page or update the UI
+      setRecipes(prevRecipes => 
+        prevRecipes.map(recipe => 
+          recipe._id === recipeId ? { ...recipe, wishlist: !currentValue } : recipe
+        )
+      );
       
     } catch (error) {
       console.error('Error updating wishlist:', error);

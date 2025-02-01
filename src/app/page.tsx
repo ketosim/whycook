@@ -61,6 +61,15 @@ export default function RecipeList() {
   }, []);
 
   async function toggleWishlist(recipeId: string, currentValue: boolean) {
+    // Optimistically update the UI
+    const updatedWishlistStatus = !currentValue;
+
+    setRecipes(prevRecipes => 
+      prevRecipes.map(recipe => 
+        recipe._id === recipeId ? { ...recipe, wishlist: updatedWishlistStatus } : recipe
+      )
+    );
+
     try {
       const response = await fetch('/api/recipes', {
         method: 'PATCH',
@@ -68,24 +77,25 @@ export default function RecipeList() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          id: recipeId,
-          wishlist: !currentValue 
+          id: recipeId, // Send the recipe ID in the body
+          wishlist: updatedWishlistStatus // Send the new wishlist status
         }),
       });
       
       if (!response.ok) throw new Error('Failed to update wishlist');
-      
-      // Refresh the page or update the UI
-      setRecipes(prevRecipes => 
-        prevRecipes.map(recipe => 
-          recipe._id === recipeId ? { ...recipe, wishlist: !currentValue } : recipe
-        )
-      );
-      
+
+      // Optionally, you can handle the response if needed
     } catch (error) {
       console.error('Error updating wishlist:', error);
+      
+      // Revert the optimistic update if the request fails
+      setRecipes(prevRecipes => 
+        prevRecipes.map(recipe => 
+          recipe._id === recipeId ? { ...recipe, wishlist: currentValue } : recipe
+        )
+      );
     }
-  };
+  }
 
 
   const groupedRecipes = React.useMemo(() => {
@@ -123,11 +133,9 @@ export default function RecipeList() {
                       <div className="flex justify-between items-center">
                         <h3 className="text-base font-medium mb-2 twin-peaks-title">{recipe.name}</h3>
                         <div onClick={() => toggleWishlist(recipe._id,recipe.wishlist)} className="cursor-pointer">
-                          <Heart 
-                            size={24} //                            
-
-                            className={recipe.wishlist ? 'text-red-500' : 'text-gray-500'} 
-                          />
+                          <span className={recipe.wishlist ? 'text-red-500' : 'text-gray-500'} style={{ fontSize: '24px' }}>
+                            {recipe.wishlist ? '💗' : '🤍'}
+                          </span>
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-1.5">

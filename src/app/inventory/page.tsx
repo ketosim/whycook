@@ -168,7 +168,7 @@ export default function InventoryPage() {
                       <span className="font-medium">{item.name}</span>
                       {item.lastPurchased && (
                         <span className="text-xs text-muted-foreground">
-                          Last purchased: {new Date(item.lastPurchased).toLocaleDateString()}
+                          InStock: {new Date(item.lastPurchased).toLocaleDateString()}
                         </span>
                       )}
                     </div>

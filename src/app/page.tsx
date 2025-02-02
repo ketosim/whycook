@@ -109,7 +109,7 @@ export default function RecipeList() {
   }, [recipes]);
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-screen">Loading...cooking takes longer you know</div>;
+    return <div className="flex justify-center items-center h-screen">One cannot think well, love well, sleep well, if one has not dined well</div>;
   }
 
   return (

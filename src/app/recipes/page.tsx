@@ -125,7 +125,7 @@ export default function RecipePage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: newRecipeName,
+          title: newRecipeName,
           category: selectedCategory,
           ingredients: selectedIngredients
         }),

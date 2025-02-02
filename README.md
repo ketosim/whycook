@@ -1,6 +1,5 @@
-# WhyCook
 
-**WhyCook** is a web-based application designed to my roommates efficiently manage their **recipes** and **ingredients** while showcasing what meals can be prepared based on available items at home. This project is built using **Next.js**, **Tailwind CSS**, and **MongoDB**, with **Vercel** handling both frontend and backend deployment.
+**WhyCook** is a web-based application designed to help my roommate efficiently manage their **recipes** and **ingredients** while showcasing what meals can be prepared based on available items at home. This project is built using **Next.js**, **Tailwind CSS**, and **MongoDB**, with **Vercel** handling both frontend and backend deployment.
 
 You can view the live application here: [WhyCook App](https://whycook.vercel.app/)
 
@@ -11,15 +10,22 @@ WhyCook connects to two **MongoDB databases**:
 - **Recipe Database:** Stores information about recipes, including required ingredients.
 - **Ingredient Database:** Tracks available ingredients at home.
 
-The app determines what meals can be cooked based on the current stock and displays options in a clean, user-friendly interface.
+The **main page** acts as a **live monitor**, displaying recipes that can be cooked based on the available ingredients. Users can easily check what they can prepare in real-time without needing to manually check inventory.
+
+Additionally, there are **dedicated pages for editing recipes and ingredients**, allowing users to:
+- Add or update recipes and their ingredient lists.
+- Manage the ingredient inventory (add, update, or remove items).
+
+These admin features provide flexibility for managing stock and recipes dynamically.
 
 ---
 
 ## **Features**
-- List recipes and filter based on available ingredients.
-- Add or remove ingredients from the inventory.
-- Track which meals can be prepared based on current inventory.
-- Wishlist functionality to save favorite recipes.
+- **Real-time recipe monitor:** See what you can cook based on available ingredients.
+- **Ingredient management:** Easily add, update, or remove ingredients.
+- **Recipe management:** Create, edit, or delete recipes as needed.
+- **Wishlist functionality:** Save and manage favorite recipes.
+- **Seamless integration:** Two connected databases (recipes and ingredients) ensure updates in one area are reflected in the live monitor.
 
 ---
 
@@ -31,4 +37,23 @@ The app determines what meals can be cooked based on the current stock and displ
 - **API Integration:** Custom API routes using Next.js
 
 ---
+
+
+## **Project Structure**
+
+```
+whycook/
+├── .next/                    # Next.js build directory (ignored in Git)
+├── node_modules/             # Dependencies (ignored in Git)
+├── public/                   # Static assets (images, icons, etc.)
+├── src/                      # Main source code
+│   ├── app/                  # Next.js pages and components
+│   ├── components/           # Reusable components
+│   ├── lib/                  # Utility functions and configurations
+│   ├── models/               # MongoDB schemas for Recipes and Ingredients
+├── .env.local                # Local environment variables (ignored in Git)
+├── package.json              # Project metadata and dependencies
+├── tailwind.config.cjs       # Tailwind CSS configuration
+└── README.md                 # Project documentation
+```
 

@@ -1,6 +1,6 @@
 # WhyCook
 
-**WhyCook** is a web-based application designed to help users efficiently manage their **recipes** and **ingredients** while showcasing what meals can be prepared based on available items at home. This project is built using **Next.js**, **Tailwind CSS**, and **MongoDB**, with **Vercel** handling both frontend and backend deployment.
+**WhyCook** is a web-based application designed to my roommates efficiently manage their **recipes** and **ingredients** while showcasing what meals can be prepared based on available items at home. This project is built using **Next.js**, **Tailwind CSS**, and **MongoDB**, with **Vercel** handling both frontend and backend deployment.
 
 You can view the live application here: [WhyCook App](https://whycook.vercel.app/)
 

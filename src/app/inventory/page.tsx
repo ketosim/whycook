@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useMediaQuery } from 'react-responsive';
 
 interface FoodItem {
   _id: string;
@@ -22,6 +23,8 @@ export default function InventoryPage() {
   const [selectedType, setSelectedType] = React.useState<FoodItem['type']>('main');
   const [selectedGroup, setSelectedGroup] = React.useState<FoodItem['group']>('protein');
   const [isLoading, setIsLoading] = React.useState(true);
+
+  const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
 
   const fetchInventory = async () => {
     try {
@@ -114,18 +117,18 @@ export default function InventoryPage() {
       {/* Add Item Form */}
       <Card className="mb-8">
         <CardContent className="pt-6">
-          <form onSubmit={addItem} className="flex flex-wrap gap-4">
+          <form onSubmit={addItem} className={`flex flex-wrap gap-4 ${isMobile ? 'flex-col' : ''}`}>
             <Input
               type="text"
               value={newItemName}
               onChange={(e) => setNewItemName(e.target.value)}
               placeholder="Add new ingredient"
-              className="flex-1 min-w-[200px]"
+              className={`flex-1 min-w-[200px] ${isMobile ? 'w-full' : ''}`}
             />
             <select 
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value as FoodItem['type'])}
-              className="px-3 py-2 border rounded bg-background min-w-[150px]"
+              className={`px-3 py-2 border rounded bg-background ${isMobile ? 'w-full' : 'min-w-[150px]'}`}
             >
               <option value="main">Main</option>
               <option value="secondary">Secondary</option>
@@ -134,20 +137,20 @@ export default function InventoryPage() {
             <select 
               value={selectedGroup}
               onChange={(e) => setSelectedGroup(e.target.value as FoodItem['group'])}
-              className="px-3 py-2 border rounded bg-background min-w-[150px]"
+              className={`px-3 py-2 border rounded bg-background ${isMobile ? 'w-full' : 'min-w-[150px]'}`}
             >
               <option value="protein">Protein</option>
               <option value="veggie">Veggie</option>
               <option value="dairy">Dairy</option>
               <option value="other">Other</option>
             </select>
-            <Button type="submit">Add Item</Button>
+            <Button type="submit" className={`${isMobile ? 'w-full' : ''}`}>Add Item</Button>
           </form>
         </CardContent>
       </Card>
 
       {/* Category Lists */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'} gap-6`}>
         {(['protein', 'veggie', 'dairy', 'other'] as const).map(category => (
           <div key={category} className="space-y-2">
             <div className="flex items-center justify-between mb-4">
@@ -177,7 +180,7 @@ export default function InventoryPage() {
                         size="sm"
                         variant={item.instock ? "default" : "secondary"}
                         onClick={() => toggleInstock(item._id, item.instock)}
-                        className="w-24"
+                        className={`w-full sm:w-24 ${isMobile ? 'mt-2' : ''}`}
                       >
                         {item.instock ? 'In Stock' : 'Out'}
                       </Button>
@@ -185,6 +188,7 @@ export default function InventoryPage() {
                         size="sm"
                         variant="destructive"
                         onClick={() => deleteItem(item._id)}
+                        className={`w-full sm:w-24 ${isMobile ? 'mt-2' : ''}`}
                       >
                         Delete
                       </Button>

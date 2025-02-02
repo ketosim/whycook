@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose'
 
 // Interface to define the Recipe document structure
 export interface IRecipe extends Document {
-  title: string;
+  name: string;
   ingredients: string[];
   instructions: string[];
   wishlist: boolean;
@@ -11,7 +11,7 @@ export interface IRecipe extends Document {
 
 // Create the schema
 const recipeSchema = new Schema({
-  title: {
+  name: {
     type: String,
     required: true,
     unique: true
@@ -26,7 +26,6 @@ const recipeSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Food'
   }],
-  instructions: [{ type: String }],
   wishlist: {
     type: Boolean,
     default: false

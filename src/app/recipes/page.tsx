@@ -125,19 +125,19 @@ export default function RecipePage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title: newRecipeName,
+          name: newRecipeName,
           category: selectedCategory,
           ingredients: selectedIngredients
         }),
       });
       
-      if (!res.ok) throw new Error('Failed to add recipe');
+      if (!res.ok) throw new Error('Failed to create recipe');
       
       setNewRecipeName('');
       setSelectedIngredients([]);
       fetchData();
     } catch (err) {
-      console.error('Failed to add recipe:', err);
+      console.error('Failed to create recipe:', err);
     }
   };
 

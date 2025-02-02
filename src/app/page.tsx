@@ -109,7 +109,17 @@ export default function RecipeList() {
   }, [recipes]);
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-screen">One cannot think well, love well, sleep well, if one has not dined well</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-center max-w-md">
+          {`One cannot think well, love well, sleep well, if one has not dined well`
+            .split(',')
+            .map((line, index) => (
+              <p key={index}>{line.trim()}</p>
+            ))}
+        </div>
+      </div>
+    );
   }
 
   return (

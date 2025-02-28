@@ -1,7 +1,6 @@
 
 **WhyCook** is a web-based application designed to help my roommate efficiently manage their **recipes** and **ingredients** while showcasing what meals can be prepared based on available items at home. This project is built using **Next.js**, **Tailwind CSS**, and **MongoDB**, with **Vercel** handling both frontend and backend deployment.
 
-You can view the live application here: [WhyCook App](https://whycook.vercel.app/)
 
 ---
 
@@ -37,23 +36,4 @@ These admin features provide flexibility for managing stock and recipes dynamica
 - **API Integration:** Custom API routes using Next.js
 
 ---
-
-
-## **Project Structure**
-
-```
-whycook/
-├── .next/                    # Next.js build directory (ignored in Git)
-├── node_modules/             # Dependencies (ignored in Git)
-├── public/                   # Static assets (images, icons, etc.)
-├── src/                      # Main source code
-│   ├── app/                  # Next.js pages and components
-│   ├── components/           # Reusable components
-│   ├── lib/                  # Utility functions and configurations
-│   ├── models/               # MongoDB schemas for Recipes and Ingredients
-├── .env.local                # Local environment variables (ignored in Git)
-├── package.json              # Project metadata and dependencies
-├── tailwind.config.cjs       # Tailwind CSS configuration
-└── README.md                 # Project documentation
-```
 
